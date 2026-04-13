@@ -346,6 +346,21 @@
 
 \int_zero:N \c@secnumdepth
 
+\cs_if_exist:NT \chapter
+  {
+    \cs_set:Npn \chapter
+      {
+        \clearpage
+        \@startsection { chapter } { 0 } { \z@ }
+                       { -3.5ex \@plus -1ex \@minus -.2ex }
+                       { 2.3ex \@plus .2ex }
+                       {
+                         \raggedright \AFESBrandFontHeadOne
+                         \LARGE \MakeUppercase
+                       }
+      }
+  }
+
 \cs_set:Npn \section
   {
     \@startsection { section } { 1 } { \z@ }
