@@ -249,6 +249,7 @@
     \file_input:n { focusadl-lang-#1 }
   }
 
+
 %%%
 %%% Scripture quotation set up
 %%%
@@ -279,11 +280,14 @@
     \tl_set:Nn \l__focusadl_passage_tl {#1}
   }
 
-\RenewDocumentCommand \maketitle { s }
+% Define a socket for different styles of titles
+
+\socket_new:nn { focusadl / title } { 1 }
+
+% article class style title socket plug
+
+\socket_new_plug:nnn { focusadl / title } { top }
   {
-    \mode_leave_vertical:
-    \para_end:
-    \skip_vertical:n { -8.2ex plus -2.0pt }
     \AFESBrandGridSystem
       [
         , body          = false
@@ -306,8 +310,77 @@
               }
           }
       }
-    \thispagestyle { empty }
   }
+
+% book class style title socket plug
+
+\socket_new_plug:nnn { focusadl / title } { page }
+  {
+    \AFESBrandGridSystem
+      [
+        , body / colour = white
+        , body / height = 4ex + \textheight -
+                          0.1 \c__focusadl_min_paper_side_dim
+        , head / colour = hero
+        , head / height = 0.1 \c__focusadl_min_paper_side_dim
+        , logo          = focus
+        , logo / colour = white
+        , url           = false
+      ]
+      {
+        \AFESBrandFontHeadOne
+        \MakeUppercase { \@title }
+      }
+    \clearpage
+  }
+
+\legacy_if:nTF { @titlepage }
+  {
+    \socket_assign_plug:nn { focusadl / title } { page }
+  }
+  {
+    \socket_assign_plug:nn { focusadl / title } { top }
+  }
+
+\RenewDocumentCommand \maketitle { s }
+  {
+    \mode_leave_vertical:
+    \para_end:
+    \skip_vertical:n { -8.2ex plus -2.0pt }
+    \thispagestyle { empty }
+    \socket_use:nn { focusadl / title } {#1}
+  }
+
+% title page environment allowing custom content inside the AFES Brand Grid
+% System
+
+\RenewDocumentEnvironment { titlepage } { +b }
+  {
+    \mode_leave_vertical:
+    \para_end:
+    \skip_vertical:n { -8.2ex plus -2.0pt }
+    \thispagestyle { empty }
+    \AFESBrandGridSystem
+      [
+        , body / colour = white
+        , body / height = 4ex + \textheight -
+                          0.1 \c__focusadl_min_paper_side_dim
+        , head / colour = hero
+        , head / height = 0.1 \c__focusadl_min_paper_side_dim
+        , logo          = focus
+        , logo / colour = white
+        , url           = false
+      ]
+      {#1}
+    \clearpage
+  }
+  { }
+
+\cs_set_nopar:Npn \FOCUSAdlUseTitle
+  { \@title }
+
+\cs_set_nopar:Npn \FOCUSAdlUsePassage
+  { \l__focusadl_passage_tl }
 
 
 %%%
