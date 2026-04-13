@@ -57,11 +57,20 @@
 \tl_new:N    \l__focusadl_base_class_tl
 
 \cs_set_eq:NN \__focusadl_set_layout: \relax
+\tl_new:N \l__focusadl_obv_tl
+\tl_new:N \l__focusadl_rev_tl
+\tl_set:Nn \l__focusadl_obv_tl { O }
+\tl_set:Nn \l__focusadl_rev_tl { E }
 
 \keys_define:nn { focusadl }
   {
     , layout  .choices:nn       = { 2 ~ on ~ 1 , repeated ~ 2-up }
                                   {
+                                    \str_if_eq:nnT {#1} { 2 ~ on ~ 1 }
+                                      {
+                                        \tl_set:Nn \l__focusadl_obv_tl { E }
+                                        \tl_set:Nn \l__focusadl_rev_tl { O }
+                                      }
                                     \cs_set:Nn \__focusadl_set_layout:
                                       {
                                         \pgfpagesuselayout
@@ -310,9 +319,10 @@
 \fancyhf { }
 \legacy_if:nTF { @twoside }
   {
-    \fancyhead [ RE , LO ] { \thepage }
-    \fancyhead [ RO ] { \@title }
-    \fancyhead [ LE ]
+    \fancyhead [ \exp_after:wN R \l__focusadl_obv_tl ] { \thepage }
+    \fancyhead [ \exp_after:wN L \l__focusadl_rev_tl ] { \thepage }
+    \fancyhead [ \exp_after:wN R \l__focusadl_rev_tl ] { \@title }
+    \fancyhead [ \exp_after:wN L \l__focusadl_obv_tl ]
       {
         \tl_if_empty:NTF \l__focusadl_passage_tl
           { \@title }
