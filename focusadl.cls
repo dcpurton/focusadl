@@ -799,7 +799,7 @@
 
 
 %%%
-%%% Write in gaps
+%%% Write in gaps spacing
 %%%
 
 \keys_define:nn { focusadl / gap }
@@ -829,6 +829,13 @@
     \hrule height -3.6pt depth 4pt
     \skip_horizontal:N \l__focusadl_gap_wd_skip
     \strut
+  }
+
+\NewDocumentCommand \FOCUSAdlSpace { o }
+  {
+    \tl_if_novalue:nTF
+      { \skip_vertical:N \l__focusadl_spacing_skip }
+      { \skip_vertical:n {#1} }
   }
 
 \endinput
