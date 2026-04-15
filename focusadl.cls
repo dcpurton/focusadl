@@ -417,7 +417,7 @@
 %%% Section heading set up
 %%%
 
-\int_zero:N \c@secnumdepth
+\int_set:Nn \c@secnumdepth { -1 }
 
 \cs_if_exist:NT \chapter
   {
@@ -428,8 +428,10 @@
                        { -3.5ex \@plus -1ex \@minus -.2ex }
                        { 2.3ex \@plus .2ex }
                        {
-                         \raggedright \AFESBrandFontHeadOne
-                         \LARGE \MakeUppercase
+                         \raggedright
+                         \AFESBrandFontHeadOne
+                         \LARGE
+                         \MakeUppercase
                        }
       }
   }
@@ -468,6 +470,13 @@
                    }
   }
 
+
+%%%
+%%% Table of contents set up
+%%%
+
+\int_set:Nn \c@tocdepth { 1 }
+
 %%%
 %%% List set up
 %%%
@@ -492,6 +501,7 @@
   {
     , font = \fontseries { sb } \selectfont
   }
+
 
 %%%
 %%% Box set up
