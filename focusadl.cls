@@ -465,8 +465,19 @@
                    {
                      \raggedright
                      \normalfont
-                     \normalsize
                      \bfseries
+                   }
+  }
+
+\cs_set:Npn \paragraph
+  {
+    \@startsection { paragraph } { 4 } { \z@ }
+                   { -3.25ex \@plus -1ex \@minus -.2ex }
+                   { 1.5ex \@plus .2ex }
+                   {
+                     \raggedright
+                     \normalfont
+                     \AFESBrandFontSelect{series=sb}
                    }
   }
 
