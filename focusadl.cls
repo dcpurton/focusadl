@@ -810,7 +810,7 @@
 
 
 %%%
-%%% Write in gaps spacing
+%%% Write in gaps and spacing
 %%%
 
 \keys_define:nn { focusadl / gap }
@@ -844,9 +844,11 @@
 
 \NewDocumentCommand \FOCUSAdlSpace { o }
   {
-    \tl_if_novalue:nTF
+    \tl_if_novalue:nTF {#1}
       { \skip_vertical:N \l__focusadl_spacing_skip }
-      { \skip_vertical:n {#1} }
+      {
+        \skip_vertical:n { #1 \l__focusadl_spacing_skip }
+      }
   }
 
 \endinput
