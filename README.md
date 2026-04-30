@@ -26,6 +26,17 @@ A simple title can be set using:
 \maketitle
 ```
 
+A full page title page inside the AFES Brand Grid System can by produced using
+the `titlepage` environment. A simple full page title page can be inserted
+with `\maketitle` if the `titlepage` option is passed to the class.
+
+### Document imprint page
+
+A copyright imprint page can be inserted with the `\imprintpage` command. A
+copyright statement for Bible quotations from the NIVUK version is included.
+This can be changed by defining and assigning a new socket plug to the
+`focusadl/biblecopyright` socket.
+
 ### Document layout
 
 The following document layouts are supported using the `layout` class option:
@@ -70,6 +81,12 @@ colour. Three types of `accentbox` are supported:
 - `type=twocolumn`: Set a two column breakable box.
 - `type=parallel`: Set a two column breakable box with parallel content (e.g.,
   for setting the Bible in two languages in parallel).
+
+## Miscellaneous commands
+
+`\gap[<options>]`: Insert a fill in the gap line. Supported options are `text`
+to specify an default text and `width` for the width of the gap as a skip
+expression.
 
 ## Licence
 
