@@ -859,6 +859,24 @@
 %%% Imprint page
 %%%
 
+\ExplSyntaxOff
+
+\newcommand{\nivukcopyright}{%
+  Scripture taken from The Holy Bible, New International Version®
+  (Anglicised), NIV®. Copyright ©~1979, 1984, 2011 Biblica, Inc. Used by
+  permission of Hodder \& Stoughton Limited, a division of Hachette UK. All
+  rights reserved worldwide. ‘New International Version’ and ‘NIV’ are
+  registered trademarks of Biblica, Inc. Used by permission.}
+
+\ExplSyntaxOn
+
+\socket_new:nn { focusadl / biblecopyright } { 0 }
+\socket_new_plug:nnn { focusadl / biblecopyright } { nivuk }
+  {
+    \nivukcopyright
+  }
+\socket_assign_plug:nn { focusadl / biblecopyright } { nivuk }
+
 \NewDocumentCommand \imprintpage { }
   {
     \clearpage
@@ -871,19 +889,8 @@
       © ~ \the\year{} ~ FOCUS ~ Adelaide
       \par
       \bigskip
-      \nivukcopyright
+      \socket_use:n { focusadl / biblecopyright }
     \group_end:
   }
-
-\ExplSyntaxOff
-
-\newcommand{\nivukcopyright}{%
-  Scripture taken from The Holy Bible, New International Version®
-  (Anglicised), NIV®. Copyright ©~1979, 1984, 2011 Biblica, Inc. Used by
-  permission of Hodder \& Stoughton Limited, a division of Hachette UK. All
-  rights reserved worldwide. ‘New International Version’ and ‘NIV’ are
-  registered trademarks of Biblica, Inc. Used by permission.}
-
-\ExplSyntaxOn
 
 \endinput
