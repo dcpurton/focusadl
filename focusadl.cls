@@ -897,4 +897,22 @@
     \group_end:
   }
 
+
+%%%
+%%% URLs
+%%%
+
+\RequirePackage{url}
+
+\urlstyle{same}
+
+\Urlmuskip 0mu plus 3mu
+\def\UrlBreaks{\do\@\do\\\do\/\do\!\do\_\do\|\do\;\do\>\do\]%
+ \do\)\do\,\do\?\do\'\do+\do\=\do\#}%
+\def\UrlSpecials{\do\.{\penalty\UrlBreakPenalty\mathchar`.}%
+  \do\_{\penalty\UrlBreakPenalty\mathchar`_}%
+  \do\-{\penalty\UrlBreakPenalty\mathchar`-}%
+  \do\ {\Url@space}\do\%{\Url@percent}\do\^^M{\Url@space}%
+  \Url@force@Tilde}
+
 \endinput
