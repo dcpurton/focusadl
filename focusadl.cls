@@ -847,16 +847,15 @@
     \strut
   }
 
-\NewDocumentCommand \FOCUSAdlSpace { o }
+\NewDocumentCommand \FOCUSAdlSpace { O { 1 } }
   {
-    \tl_if_novalue:nTF {#1}
-      {
-        \skip_vertical:n { \l__focusadl_spacing_skip - \baselineskip }
-      }
-      {
-        \skip_vertical:n { #1 \l__focusadl_spacing_skip - \baselineskip }
-      }
+    \skip_vertical:n { #1 \l__focusadl_spacing_skip - \baselineskip }
     \hbox:n { }
+  }
+
+\NewExpandableDocumentCommand \FOCUSAdlSpaceSkip { m }
+  {
+    \skip_eval:n { #1 \l__focusadl_spacing_skip }
   }
 
 
