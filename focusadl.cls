@@ -488,6 +488,7 @@
 
 \int_set:Nn \c@tocdepth { 1 }
 
+
 %%%
 %%% List set up
 %%%
@@ -795,16 +796,20 @@
 
 \keys_set:nn { focusadl / leadernotes } { }
 
-\NewDocumentEnvironment { leadernotes } { o }
+\NewDocumentEnvironment { leadernotes } { o+b }
   {
-    \tl_if_novalue:nF {#1}
+    \bool_if:NT \l__focusadl_use_leader_notes_bool
       {
-        \keys_set:nn { focusadl / leadernotes } {#1}
+        \tl_if_novalue:nF {#1}
+          {
+            \keys_set:nn { focusadl / leadernotes } {#1}
+          }
+        \mode_leave_vertical:
+        \color { \l__focusadl_leadernotes_colour_tl }
+        \l__focusadl_leadernotes_font_tl
+        \ignorespaces
+        #2
       }
-    \mode_leave_vertical:
-    \color { \l__focusadl_leadernotes_colour_tl }
-    \l__focusadl_leadernotes_font_tl
-    \ignorespaces
   }
   { }
 
