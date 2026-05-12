@@ -22,6 +22,7 @@
   [
     , import
     , language = Chinese Simplified
+    , onchar = ids fonts
   ]
   {chinese-simplified}
 
@@ -46,6 +47,35 @@
                            }
   ]
   {Noto Sans CJK SC DemiLight}
+
+\babelfont [chinese-simplified] {livvic}
+  [
+    , FontFace      = {ul} {n}  { Font = Noto Sans CJK SC Thin }
+    , FontFace      = {ul} {it} {
+                                  , Font      = Noto Sans CJK SC Thin
+                                  , FakeSlant = 0.15
+                                }
+    , FontFace      = {l}  {n}  { Font = Noto Sans CJK SC Light }
+    , FontFace      = {l}  {it} {
+                                  , Font      = Noto Sans CJK SC Light
+                                  , FakeSlant = 0.15
+                                }
+    , FontFace      = {sl} {n}  { Font = Noto Sans CJK SC Regular }
+    , FontFace      = {sl} {it} {
+                                  , Font      = Noto Sans CJK SC Regular
+                                  , FakeSlant = 0.15
+                                }
+    , ItalicFont         = Noto Sans CJK SC Medium
+    , ItalicFeatures     = { FakeSlant = 0.15 }
+    , BoldItalicFont     = Noto Sans CJK SC Bold
+    , BoldItalicFeatures = { FakeSlant = 0.15 }
+    , FontFace      = {ub} {n} { Font = Noto Sans CJK SC Black }
+    , FontFace      = {ub} {it} {
+                                  , Font      = Noto Sans CJK SC Black
+                                  , FakeSlant = 0.15
+                                }
+  ]
+  {Noto Sans CJK SC Medium}
 
 \babelprehyphenation {chinese-simplified} { [‘“][‘“] }
   {
