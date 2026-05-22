@@ -79,7 +79,7 @@
                                       }
                                   }
     , layout  .value_required:n = true
-    , spacing .code:n           = {
+    , spaces  .code:n           = {
                                     \str_case:nnF {#1}
                                       {
                                         { normal }
@@ -107,8 +107,8 @@
                                           {#1}
                                       }
                                   }
-    , spacing .value_required:n = true
-    , spacing .initial:n        = normal
+    , spaces  .value_required:n = true
+    , spaces  .initial:n        = normal
     , type    .choices:nn       = { handout , booklet }
                                   {
                                     \str_if_eq:VnTF \l_keys_choice_str
