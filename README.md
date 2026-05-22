@@ -58,7 +58,7 @@ The following document types are supported using the `type` class option:
 The class auto-spaces `enumerate` items. The spacing can be set using the
 `spacing` class option:
 
-- `spacing=normal | tighter | looser`
+- `spaces=normal | tighter | looser`
 
 ### Multi-lingual support
 
@@ -87,6 +87,11 @@ colour. Three types of `accentbox` are supported:
 `\gap[<options>]`: Insert a fill in the gap line. Supported options are `text`
 to specify an default text and `width` for the width of the gap as a skip
 expression.
+
+## Leader notes
+
+Leader notes can be inserted using the `leadernotes` environment and
+`\textleadernotes` function.
 
 ## Licence
 
