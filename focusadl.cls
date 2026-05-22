@@ -854,20 +854,22 @@
 
 \NewDocumentCommand \gap { o }
   {
-    \tl_if_novalue:nF {#1}
-      {
-        \keys_set:nn { focusadl / gap } {#1}
-      }
-    \vrule height 2.5ex width 0pt
-    \nobreak
-    \tl_if_empty:NF \l__focusadl_gap_text_tl
-      {
-        \hbox_overlap_right:n { \l__focusadl_gap_text_tl }
-      }
-    \leaders
-    \hrule height -3.6pt depth 4pt
-    \skip_horizontal:N \l__focusadl_gap_wd_skip
-    \strut
+    \group_begin:
+      \tl_if_novalue:nF {#1}
+        {
+          \keys_set:nn { focusadl / gap } {#1}
+        }
+      \vrule height 2.5ex width 0pt
+      \nobreak
+      \tl_if_empty:NF \l__focusadl_gap_text_tl
+        {
+          \hbox_overlap_right:n { \l__focusadl_gap_text_tl }
+        }
+      \leaders
+      \hrule height -3.6pt depth 4pt
+      \skip_horizontal:N \l__focusadl_gap_wd_skip
+      \strut
+    \group_end:
   }
 
 \NewDocumentCommand \FOCUSAdlSpace { O { 1 } }
