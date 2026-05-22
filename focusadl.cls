@@ -796,23 +796,46 @@
 
 \keys_set:nn { focusadl / leadernotes } { }
 
+\cs_new_protected:Nn \__focusadl_leadernotes:nn
+  {
+    \group_begin:
+      \bool_if:NT \l__focusadl_use_leader_notes_bool
+        {
+          \tl_if_novalue:nF {#1}
+            {
+              \keys_set:nn { focusadl / leadernotes } {#1}
+            }
+          \mode_leave_vertical:
+          \color { \l__focusadl_leadernotes_colour_tl }
+          \l__focusadl_leadernotes_font_tl
+          \ignorespaces
+          #2
+        }
+    \group_end:
+  }
+
 \NewDocumentEnvironment { leadernotes } { o+b }
   {
-    \bool_if:NT \l__focusadl_use_leader_notes_bool
-      {
-        \tl_if_novalue:nF {#1}
-          {
-            \keys_set:nn { focusadl / leadernotes } {#1}
-          }
-        \mode_leave_vertical:
-        \color { \l__focusadl_leadernotes_colour_tl }
-        \l__focusadl_leadernotes_font_tl
-        \ignorespaces
-        #2
-      }
+    \__focusadl_leadernotes:nn {#1} {#2}
   }
   { }
 
+\NewDocumentCommand \textleadernotes { om }
+  {
+    \__focusadl_leadernotes:nn {#1} {#2}
+  }
+
+\prg_new_protected_conditional:Npnn \__focusadl_use_leader_notes:
+  { T , F , TF }
+  {
+    \bool_if:NTF \l__focusadl_use_leader_notes_bool
+      { \prg_return_true: }
+      { \prg_return_false: }
+  }
+
+\cs_new_eq:NN \IfUseLeaderNotesTF \__focusadl_use_leader_notes:TF
+\cs_new_eq:NN \IfUseLeaderNotesT  \__focusadl_use_leader_notes:T
+\cs_new_eq:NN \IfUseLeaderNotesF  \__focusadl_use_leader_notes:F
 
 %%%
 %%% Write in gaps and spacing
