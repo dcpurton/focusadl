@@ -28,6 +28,7 @@
 
 \babelfont [chinese-simplified] {sf}
   [
+    , UprightFont        = Noto Sans CJK SC DemiLight
     , ItalicFont         = Noto Sans CJK SC DemiLight
     , BoldFont           = Noto Sans CJK SC Medium
     , BoldItalicFont     = Noto Sans CJK SC Medium
@@ -46,36 +47,42 @@
                              , SmallCapsFont = {Noto Sans CJK SC Medium}
                            }
   ]
-  {Noto Sans CJK SC DemiLight}
+  {Noto Sans CJK SC}
 
 \babelfont [chinese-simplified] {livvic}
   [
-    , FontFace           = {ul} {n}  { Font = Noto Sans CJK SC Thin }
-    , FontFace           = {ul} {it} {
-                                       , Font      = Noto Sans CJK SC Thin
-                                       , FakeSlant = 0.15
-                                     }
-    , FontFace           = {l}  {n}  { Font = Noto Sans CJK SC Light }
-    , FontFace           = {l}  {it} {
-                                       , Font      = Noto Sans CJK SC Light
-                                       , FakeSlant = 0.15
-                                     }
-    , FontFace           = {sl} {n}  { Font = Noto Sans CJK SC Regular }
-    , FontFace           = {sl} {it} {
-                                       , Font      = Noto Sans CJK SC Regular
-                                       , FakeSlant = 0.15
-                                     }
-    , ItalicFont         = Noto Sans CJK SC Medium
-    , ItalicFeatures     = { FakeSlant = 0.15 }
-    , BoldItalicFont     = Noto Sans CJK SC Bold
-    , BoldItalicFeatures = { FakeSlant = 0.15 }
-    , FontFace           = {ub} {n} { Font = Noto Sans CJK SC Black }
-    , FontFace           = {ub} {it} {
-                                       , Font      = Noto Sans CJK SC Black
-                                       , FakeSlant = 0.15
-                                     }
+    , FontFace = {ul} {n}  { Font = Noto Sans CJK SC Thin }
+    , FontFace = {ul} {it} {
+                             , Font      = Noto Sans CJK SC Thin
+                             , FakeSlant = 0.15
+                           }
+    , FontFace = {l}  {n}  { Font = Noto Sans CJK SC Light }
+    , FontFace = {l}  {it} {
+                             , Font      = Noto Sans CJK SC Light
+                             , FakeSlant = 0.15
+                           }
+    , FontFace = {sl} {n}  { Font = Noto Sans CJK SC Regular }
+    , FontFace = {sl} {it} {
+                             , Font      = Noto Sans CJK SC Regular
+                             , FakeSlant = 0.15
+                           }
+    , FontFace = {m}  {n}  { Font = Noto Sans CJK SC Medium }
+    , FontFace = {m}  {it} {
+                             , Font      = Noto Sans CJK SC Medium
+                             , FakeSlant = 0.15
+                           }
+    , FontFace = {b}  {n}  { Font = Noto Sans CJK SC Bold }
+    , FontFace = {b}  {it} {
+                             , Font      = Noto Sans CJK SC Bold
+                             , FakeSlant = 0.15
+                           }
+    , FontFace = {ub} {n} { Font = Noto Sans CJK SC Black }
+    , FontFace = {ub} {it} {
+                             , Font      = Noto Sans CJK SC Black
+                             , FakeSlant = 0.15
+                           }
   ]
-  {Noto Sans CJK SC Medium}
+  {Noto Sans CJK SC}
 
 \babelprehyphenation {chinese-simplified} { [‘“][‘“] }
   {
@@ -105,6 +112,13 @@
     { insert, space = -.4 0 0 },
     {}
   }
+\babelprehyphenation {chinese-simplified} { [）][？。！；] }
+  {
+    {},
+    { insert, penalty = 10000 },
+    { insert, space = -.6 0 0 },
+    {}
+  }
 \babelprehyphenation {chinese-simplified} { [，。：][‘“] }
   {
     {},
@@ -118,7 +132,7 @@
 \SetProtrusion
   {
     , encoding = TU
-    , family   = Noto Sans CJK SC DemiLight
+    , family   = Noto Sans CJK SC
   }
   {
     , “  = { 600 , }
