@@ -805,10 +805,8 @@
             {
               \keys_set:nn { focusadl / leadernotes } {#1}
             }
-          \mode_leave_vertical:
           \color { \l__focusadl_leadernotes_colour_tl }
           \l__focusadl_leadernotes_font_tl
-          \ignorespaces
           #2
         }
     \group_end:
@@ -817,11 +815,13 @@
 \NewDocumentEnvironment { leadernotes } { o+b }
   {
     \__focusadl_leadernotes:nn {#1} {#2}
+    \ignorespaces
   }
   { }
 
 \NewDocumentCommand \textleadernotes { om }
   {
+    \mode_leave_vertical:
     \__focusadl_leadernotes:nn {#1} {#2}
   }
 
