@@ -837,6 +837,11 @@
 \cs_new_eq:NN \IfUseLeaderNotesT  \__focusadl_use_leader_notes:T
 \cs_new_eq:NN \IfUseLeaderNotesF  \__focusadl_use_leader_notes:F
 
+\NewDocumentCommand \useleadernotes { }
+  {
+    \bool_set_true:N \l__focusadl_use_leader_notes_bool
+  }
+
 %%%
 %%% Write in gaps and spacing
 %%%
