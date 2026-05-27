@@ -249,6 +249,11 @@
     \file_input:n { focusadl-lang-#1 }
   }
 
+\NewDocumentCommand \FOCUSAdlLoadModule { m }
+  {
+    \file_input:n { focusadl-module-#1 }
+  }
+
 
 %%%
 %%% Scripture quotation set up

@@ -1,0 +1,86 @@
+%% focusadl-module-keywords.tex
+%% Copyright (c) 2026 David Purton <david.purton@afes.org.au>
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is David Purton.
+
+\ProvidesFile{focusadl-module-keywords.tex}[2026-05-25 v1.3a
+   Keyword highlighting for the FOCUS Adelaide Document Class (DCP)]
+
+\RequirePackage{xcolor}
+\RequirePackage{luacode}
+
+\begin{luacode}
+  keyword_classes = {}
+  keywords = {}
+
+  function rebuild_keywords()
+    keywords = {}
+    for _, class in ipairs(keyword_classes) do
+      for _, word in ipairs(class.words) do
+        keywords[word] = class.colour
+      end
+    end
+  end
+
+  function add_keywords(colour, wordlist)
+    local words = {}
+    -- wordlist is a comma-separated string from LaTeX
+    for word in wordlist:gmatch("[^,]+") do
+      -- trim whitespace
+      word = word:match("^%s*(.-)%s*$")
+      if word ~= "" then
+        table.insert(words, word)
+      end
+    end
+    table.insert(keyword_classes, { colour = colour, words = words })
+    rebuild_keywords()
+  end
+
+  function make_pattern(w)
+    local escaped = w:gsub("[%(%)%.%%%+%-%*%?%[%^%$%]]", "%%%1")
+    local left  = w:sub(1,1):match("%a") and "%f[%a]" or ""
+    local right = w:sub(-1):match("%a") and "%f[%A]" or ""
+    return left .. escaped .. right
+  end
+
+  function colour_keywords(text)
+    for word, colour in pairs(keywords) do
+      local coloured = "\\textcolor{" .. colour .. "}{" .. word .. "}"
+      text = text:gsub(make_pattern(word), coloured)
+    end
+    return text
+  end
+\end{luacode}
+
+\NewDocumentCommand \FOCUSAdlAddKeywords {mm}
+  {%
+    \directlua{add_keywords("\luatexluaescapestring{#1}",
+                            "\luatexluaescapestring{#2}")}%
+  }
+
+\NewDocumentCommand \FOCUSAdlClearKeywords { }
+  {%
+    \directlua{keyword_classes = {}; keywords = {}}%
+  }
+
+\NewDocumentEnvironment{FOCUSAdlHighlightKeywords}{}
+  {%
+    \directlua{luatexbase.add_to_callback(
+      "process_input_buffer", colour_keywords, "colour keywords")}%
+  }
+  {%
+    \directlua{luatexbase.remove_from_callback(
+      "process_input_buffer", "colour keywords")}%
+  }
+
+\endinput
