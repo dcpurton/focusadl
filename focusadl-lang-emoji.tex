@@ -1,0 +1,59 @@
+%% focusadl-lang-emoji.tex
+%% Copyright (c) 2026 David Purton <david.purton@afes.org.au>
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is David Purton.
+
+\ProvidesFile{focusadl-lang-emoji.tex}[2026-05-25 v1.3a
+   Emoji support for the FOCUS Adelaide Document Class (DCP)]
+
+% Hide warnings about missing shapes for Noto Color Emoji font
+\ExplSyntaxOn
+\makeatletter
+\bool_new:N \l__focusadl_show_font_warning_bool
+\cs_set_protected:Npn \@font@warning #1
+  {
+    \bool_set_true:N \l__focusadl_show_font_warning_bool
+    \tl_if_in:nnTF {#1} { \@gobbletwo }
+      {
+        \bool_set_false:N \l__focusadl_show_font_warning_bool
+      }
+      {
+        \exp_args:Ne \str_if_in:nnT {#1} { NotoColorEmoji }
+          {
+            \bool_set_false:N \l__focusadl_show_font_warning_bool
+          }
+      }
+    \bool_if:NT \l__focusadl_show_font_warning_bool
+      {
+        \GenericWarning{(Font)\@spaces\@spaces\@spaces\space\space}
+                       {LaTeX ~ Font ~ Warning: ~ #1}
+      }
+  }
+\makeatother
+\ExplSyntaxOff
+
+\babelprovide
+  [
+    , onchar = fonts
+    , identification/tag.bcp47 = en
+    , characters/ranges = 1F300..1F9FF 2600..26FF 2700..27BF
+  ]
+  {emoji}
+
+\babelfont[emoji]{rm}{Noto Color Emoji}
+\babelfont[emoji]{sf}{Noto Color Emoji}
+\babelfont[emoji]{tt}{Noto Color Emoji}
+\babelfont[emoji]{livvic}{Noto Color Emoji}
+\babelfont[emoji]{poetsenone}{Noto Color Emoji}
+
+\endinput
