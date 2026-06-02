@@ -149,10 +149,10 @@
 
 \begin{luacode}
 function fix_cjk_quote_kerning(s)
-  s = s:gsub ("(\\vs%b{})(“)", "%1\\kern-.5em%2")
-  s = s:gsub ("(\\vs%b{})(‘)", "%1\\kern-.6em%2")
-  s = s:gsub ("(\\ch%b{})(“)", "%1\\kern-.5em%2")
-  s = s:gsub ("(\\ch%b{})(‘)", "%1\\kern-.6em%2")
+  s = s:gsub ("(\\vs%b{})(“)", "%1\\kern-.55em%2")
+  s = s:gsub ("(\\vs%b{})(‘)", "%1\\kern-.65em%2")
+  s = s:gsub ("(\\ch%b{})(“)", "%1\\kern-.6em%2")
+  s = s:gsub ("(\\ch%b{})(‘)", "%1\\kern-.7em%2")
   return s
 end
 \end{luacode}
