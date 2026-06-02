@@ -240,6 +240,17 @@
     {}
   }
 
+\RequirePackage{luacode}
+
+\begin{luacode}
+function fix_sups_kerning(s)
+  s = s:gsub ("(\\vs%b{})(A)", "%1\\kern-.05em%2")
+  return s
+end
+luatexbase.add_to_callback(
+  "process_input_buffer", fix_sups_kerning, "fix_sups_kerning")
+\end{luacode}
+
 \ExplSyntaxOn
 
 \hook_gput_code:nnn { normalfont } { focusadl } { \AFESBrandFontBody }

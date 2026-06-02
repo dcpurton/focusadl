@@ -84,6 +84,7 @@
   ]
   {Noto Sans CJK SC}
 
+
 \babelprehyphenation {chinese-simplified} { [‘“][‘“] }
   {
     {} ,
@@ -105,11 +106,18 @@
     { insert, space = -.4 0 0 },
     {}
   }
-\babelprehyphenation {chinese-simplified} { [’”][？。，！；] }
+\babelprehyphenation {chinese-simplified} { [’”][？！；] }
   {
     {},
     { insert, penalty = 10000 },
     { insert, space = -.4 0 0 },
+    {}
+  }
+\babelprehyphenation {chinese-simplified} { [’”][。，] }
+  {
+    {},
+    { insert, penalty = 10000 },
+    { insert, space = -.6 0 0 },
     {}
   }
 \babelprehyphenation {chinese-simplified} { [）][？。，！；] }
@@ -134,7 +142,27 @@
   }
 
 \babelcharproperty{`“}{linebreak}{op}
+\babelcharproperty{`‘}{linebreak}{op}
 \expandafter\addto\csname extraschinese-simplified\endcsname{\onehalfspacing}
+
+\RequirePackage{luacode}
+
+\begin{luacode}
+function fix_cjk_sups_kerning(s)
+  s = s:gsub ("(\\vs%b{})(“)", "%1\\kern-.5em%2")
+  s = s:gsub ("(\\vs%b{})(‘)", "%1\\kern-.6em%2")
+  return s
+end
+\end{luacode}
+
+\newcommand{\FOCUSAdlCJKSupsKerningOn}{%
+  \directlua{%
+    luatexbase.add_to_callback(
+      "process_input_buffer", fix_cjk_sups_kerning, "fix_cjk_sups_kerning")}}
+\newcommand{\FOCUSAdlCJKSupsKerningOff}{%
+  \directlua{%
+    luatexbase.remove_from_callback(
+      "process_input_buffer", "fix_cjk_sups_kerning")}}
 
 \SetProtrusion
   {
@@ -144,6 +172,8 @@
   {
     , “  = { 600 , }
     , ”  = { , 600 }
+    , ‘  = { 700 , }
+    , ’  = { , 700 }
     , 、 = { , 700 }
     , 。 = { , 700 }
     , 「 = { 450 , }
@@ -163,6 +193,8 @@
     , selah/text       = 细拉
     , poetry/indent    = 0em
     , poetry/bigindent = 2em
+    , before           = \FOCUSAdlCJKSupsKerningOn
+    , after            = \FOCUSAdlCJKSupsKerningOff
   }
 
 \endinput
