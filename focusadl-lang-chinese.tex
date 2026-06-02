@@ -148,21 +148,23 @@
 \RequirePackage{luacode}
 
 \begin{luacode}
-function fix_cjk_sups_kerning(s)
+function fix_cjk_quote_kerning(s)
   s = s:gsub ("(\\vs%b{})(“)", "%1\\kern-.5em%2")
   s = s:gsub ("(\\vs%b{})(‘)", "%1\\kern-.6em%2")
+  s = s:gsub ("(\\ch%b{})(“)", "%1\\kern-.5em%2")
+  s = s:gsub ("(\\ch%b{})(‘)", "%1\\kern-.6em%2")
   return s
 end
 \end{luacode}
 
-\newcommand{\FOCUSAdlCJKSupsKerningOn}{%
+\newcommand{\FOCUSAdlCJKQuoteKerningOn}{%
   \directlua{%
     luatexbase.add_to_callback(
-      "process_input_buffer", fix_cjk_sups_kerning, "fix_cjk_sups_kerning")}}
-\newcommand{\FOCUSAdlCJKSupsKerningOff}{%
+      "process_input_buffer", fix_cjk_quote_kerning, "fix_cjk_quote_kerning")}}
+\newcommand{\FOCUSAdlCJKQuoteKerningOff}{%
   \directlua{%
     luatexbase.remove_from_callback(
-      "process_input_buffer", "fix_cjk_sups_kerning")}}
+      "process_input_buffer", "fix_cjk_quote_kerning")}}
 
 \SetProtrusion
   {
@@ -193,8 +195,8 @@ end
     , selah/text       = 细拉
     , poetry/indent    = 0em
     , poetry/bigindent = 2em
-    , before           = \FOCUSAdlCJKSupsKerningOn
-    , after            = \FOCUSAdlCJKSupsKerningOff
+    , before           = \FOCUSAdlCJKQuoteKerningOn
+    , after            = \FOCUSAdlCJKQuoteKerningOff
   }
 
 \endinput
