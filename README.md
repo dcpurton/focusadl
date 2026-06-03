@@ -67,6 +67,29 @@ languages are supported:
 
 - chinese
 
+### Emoji support
+
+Emojis can be entered directly with no mark up. Use
+`\FOCUSAdlLoadModule{emoji}` to enable this feature.
+
+### Keyword highlighting
+
+Use `\FOCUSAdlLoadModule{keywords}` to enable this feature.
+
+The `FOCUSAdlHighlightKeywords` environment can be used to highlight keywords
+in a block of text.
+
+The colours and words are set up using the
+`\FOCUSAdlAddKeywords{<colour>}{<comma separated list of words/phrases>}.
+
+A limitation is that for a phrase to be correctly highlighted, it must appear
+on one line in the input file.
+
+Occasionally you may want to highlight the same word in different colours
+depending on context. One way to do this is to put a Zero-Width-Joiner
+character in one of the words to distinguish it and highlight that word in a
+different colour.
+
 ### Boxes
 
 Two kinds of boxes are supported: `herobox` and `accentbox`.
@@ -82,13 +105,13 @@ colour. Three types of `accentbox` are supported:
 - `type=parallel`: Set a two column breakable box with parallel content (e.g.,
   for setting the Bible in two languages in parallel).
 
-## Miscellaneous commands
+### Miscellaneous commands
 
 `\gap[<options>]`: Insert a fill in the gap line. Supported options are `text`
 to specify an default text and `width` for the width of the gap as a skip
 expression.
 
-## Leader notes
+### Leader notes
 
 Leader notes can be inserted using the `leadernotes` environment and
 `\textleadernotes` function.
