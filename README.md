@@ -105,6 +105,9 @@ colour. Three types of `accentbox` are supported:
 - `type=parallel`: Set a two column breakable box with parallel content (e.g.,
   for setting the Bible in two languages in parallel).
 
+A horizontal line can be inserted with `\newsegment` and you can switch to the
+second column in a parallel box with `\secondcolumn`.
+
 ### Miscellaneous commands
 
 `\gap[<options>]`: Insert a fill in the gap line. Supported options are `text`
