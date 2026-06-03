@@ -273,15 +273,14 @@ luatexbase.add_to_callback(
 \RequirePackage { scripture }
 \scripturesetup
   {
-    , chapter / font   =
-    , chapter / format = \foreignlanguage { australian } {#1}
-    , font             = \fontseries { m } \sffamily \footnotesize
-    , parindent        = 1em
-    , parskip          = 0pt plus 1pt
-    , verse / format   = \foreignlanguage { australian }
-                           { \textsuperscript {#1} }
-    , version          = NIVUK
-
+    , chapter / font     =
+    , chapter / language = australian
+    , font               = \fontseries { m } \sffamily \footnotesize
+    , parindent          = 1em
+    , parskip            = 0pt plus 1pt
+    , verse / language   = australian
+    , version            = NIVUK
+    , version / language = australian
   }
 
 
