@@ -4,7 +4,7 @@
 booklets for FOCUS Adelaide in line with the AFES unified branding guidelines.
 (See the [`afesbrand`](https://github.com/dcpurton/afesbrand) package.)
 
-The class includes various page layouts, multi-lingual support, and a set on
+The class includes various page layouts, multi-lingual support, and a set of
 environments for boxed Scripture quotations (with the help of the
 [`scripture`](https://github.com/dcpurton/scripture) package.
 
@@ -56,7 +56,7 @@ The following document types are supported using the `type` class option:
 ### Question spacing
 
 The class auto-spaces `enumerate` items. The spacing can be set using the
-`spacing` class option:
+`spaces` class option:
 
 - `spaces=normal | tighter | looser`
 
@@ -80,7 +80,7 @@ The `FOCUSAdlHighlightKeywords` environment can be used to highlight keywords
 in a block of text.
 
 The colours and words are set up using the
-`\FOCUSAdlAddKeywords{<colour>}{<comma separated list of words/phrases>}.
+`\FOCUSAdlAddKeywords{<colour>}{<comma separated list of words/phrases>}`.
 
 A limitation is that for a phrase to be correctly highlighted, it must appear
 on one line in the input file.
