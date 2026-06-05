@@ -108,6 +108,13 @@ colour. Three types of `accentbox` are supported:
 A horizontal line can be inserted with `\newsegment` and you can switch to the
 second column in a parallel box with `\secondcolumn`.
 
+### Tables
+
+For tables, use `\FOCUSAdlLoadModule{tables}`. This loads the `tabularray`
+package with the `booktabs` library and sets up a simple `FOCUSAdlTable`
+environment( taking `tabularray` options in its first argument) that sets the
+font in the first row to `\fontseries{sb}`.
+
 ### Miscellaneous commands
 
 `\gap[<options>]`: Insert a fill in the gap line. Supported options are `text`
