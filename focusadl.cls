@@ -392,7 +392,10 @@ luatexbase.add_to_callback(
   { }
 
 \cs_set_nopar:Npn \FOCUSAdlUseTitle
-  { \@title }
+  {
+    \tl_if_head_eq_meaning:VNF \@title \@latex@error
+      { \@title }
+  }
 
 \cs_set_nopar:Npn \FOCUSAdlUsePassage
   { \l__focusadl_passage_tl }
@@ -409,11 +412,11 @@ luatexbase.add_to_callback(
   {
     \fancyhead [ \exp_after:wN R \l__focusadl_obv_tl ] { \thepage }
     \fancyhead [ \exp_after:wN L \l__focusadl_rev_tl ] { \thepage }
-    \fancyhead [ \exp_after:wN R \l__focusadl_rev_tl ] { \@title }
+    \fancyhead [ \exp_after:wN R \l__focusadl_rev_tl ] { \FOCUSAdlUseTitle }
     \fancyhead [ \exp_after:wN L \l__focusadl_obv_tl ]
       {
         \tl_if_empty:NTF \l__focusadl_passage_tl
-          { \@title }
+          { \FOCUSAdlUseTitle }
           { \l__focusadl_passage_tl }
       }
   }
