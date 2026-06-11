@@ -355,6 +355,8 @@ luatexbase.add_to_callback(
     , chapter / font     =
     , chapter / language = australian
     , font               = \fontseries { m } \sffamily \footnotesize
+    , name / font        =
+    , name / format      = \FOCUSAdlLivvicTextSC {#1}
     , parindent          = 1em
     , parskip            = 0pt plus 1pt
     , verse / language   = australian
