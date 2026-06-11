@@ -302,34 +302,46 @@ luatexbase.add_to_callback(
 
 \NewDocumentCommand \FOCUSAdlLivvicTextSC { m }
   {
-    \text_map_inline:nn {#1}
+    \fontspec_if_feature:nTF { smcp }
       {
-        \__focusadl_if_lowercase:nTF {##1}
+        \textsc {#1}
+      }
+      {
+        \text_map_inline:nn {#1}
           {
-            \group_begin:
-              \AFESBrandFontSelect
-                {
-                  , series  = \__focusadl_livvic_next_weight:
-                  , relsize = 0.8
-                }
-              \text_uppercase:n {##1}
-            \group_end:
+            \__focusadl_if_lowercase:nTF {##1}
+              {
+                \group_begin:
+                  \AFESBrandFontSelect
+                    {
+                      , series  = \__focusadl_livvic_next_weight:
+                      , relsize = 0.8
+                    }
+                  \text_uppercase:n {##1}
+                \group_end:
+              }
+              {##1}
           }
-          {##1}
       }
   }
 
 \NewDocumentCommand \FOCUSAdlLivvicLORD { }
   {
-    \group_begin:
-      L
-      \AFESBrandFontSelect
-        {
-          , series  = \__focusadl_livvic_next_weight:
-          , relsize = 0.8
-        }
-      ORD
-    \group_end:
+    \fontspec_if_feature:nTF { smcp }
+      {
+        \textsc { Lord }
+      }
+      {
+        \group_begin:
+          L
+          \AFESBrandFontSelect
+            {
+              , series  = \__focusadl_livvic_next_weight:
+              , relsize = 0.8
+            }
+          ORD
+        \group_end:
+      }
   }
 
 
