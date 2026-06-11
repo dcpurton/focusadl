@@ -265,6 +265,73 @@ luatexbase.add_to_callback(
     \file_input:n { focusadl-module-#1 }
   }
 
+% Fake small caps for Livvic font
+
+\prop_new:N \l__focusadl_livvic_next_weight_prop
+
+\prop_set_from_keyval:Nn \l__focusadl_livvic_next_weight_prop
+  {
+    , ul = el
+    , el = l
+    , l  = sl
+    , sl = m
+    , m  = sb
+    , sb = b
+    , b  = ub
+    , ub = ub
+  }
+
+\cs_new:Nn \__focusadl_livvic_next_weight:
+  {
+    \prop_item:NV
+      \l__focusadl_livvic_next_weight_prop
+      \f@series
+  }
+
+\prg_new_conditional:Nnn \__focusadl_if_lowercase:n { TF, T, F }
+  {
+    \tl_set:Ne \l_tmpa_tl {#1}
+    \tl_set:Ne \l_tmpb_tl
+      {
+        \text_uppercase:n {#1}
+      }
+    \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
+      { \prg_return_false: }
+      { \prg_return_true:  }
+  }
+
+\NewDocumentCommand \FOCUSAdlLivvicTextSC { m }
+  {
+    \text_map_inline:nn {#1}
+      {
+        \__focusadl_if_lowercase:nTF {##1}
+          {
+            \group_begin:
+              \AFESBrandFontSelect
+                {
+                  , series  = \__focusadl_livvic_next_weight:
+                  , relsize = 0.8
+                }
+              \text_uppercase:n {##1}
+            \group_end:
+          }
+          {##1}
+      }
+  }
+
+\NewDocumentCommand \FOCUSAdlLivvicLORD { }
+  {
+    \group_begin:
+      L
+      \AFESBrandFontSelect
+        {
+          , series  = \__focusadl_livvic_next_weight:
+          , relsize = 0.8
+        }
+      ORD
+    \group_end:
+  }
+
 
 %%%
 %%% Scripture quotation set up
