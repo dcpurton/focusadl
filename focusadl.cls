@@ -13,7 +13,7 @@
 % 
 % The Current Maintainer of this work is David Purton.
 
-\ProvidesExplClass{focusadl}{2026-06-11}{1.7}
+\ProvidesExplClass{focusadl}{2026-06-12}{1.7a}
   {FOCUS Adelaide Document Class (DCP)}
 
 
@@ -930,6 +930,7 @@ luatexbase.add_to_callback(
   {
     \bool_set_true:N \l__focusadl_use_leader_notes_bool
   }
+
 
 %%%
 %%% Write in gaps and spacing
