@@ -13,7 +13,7 @@
 % 
 % The Current Maintainer of this work is David Purton.
 
-\ProvidesExplClass{focusadl}{2026-06-12}{1.7a}
+\ProvidesExplClass{focusadl}{2026-06-12}{1.7b}
   {FOCUS Adelaide Document Class (DCP)}
 
 
