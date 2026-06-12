@@ -268,6 +268,7 @@ luatexbase.add_to_callback(
 % Fake small caps for Livvic font
 
 \prop_new:N \l__focusadl_livvic_next_weight_prop
+\tl_new:N   \l__focusadl_livvic_sc_weight_tl
 
 \prop_set_from_keyval:Nn \l__focusadl_livvic_next_weight_prop
   {
@@ -300,22 +301,27 @@ luatexbase.add_to_callback(
       { \prg_return_true:  }
   }
 
-\NewDocumentCommand \FOCUSAdlLivvicTextSC { m }
+\NewCommandCopy \__focusadl_textsc:n \textsc
+
+\RenewDocumentCommand \textsc { m }
   {
-    \fontspec_if_feature:nTF { smcp }
-      {
-        \textsc {#1}
-      }
+    \str_if_eq:VnTF \f@family { Livvic(0) }
       {
         \text_map_inline:nn {#1}
           {
             \__focusadl_if_lowercase:nTF {##1}
               {
                 \group_begin:
+                  \tl_set:Ne \l__focusadl_livvic_sc_weight_tl
+                    { \__focusadl_livvic_next_weight: }
                   \AFESBrandFontSelect
                     {
-                      , series  = \__focusadl_livvic_next_weight:
+                      , series  = \l__focusadl_livvic_sc_weight_tl
                       , relsize = 0.8
+                    }
+                  \str_if_eq:VnT \l__focusadl_livvic_sc_weight_tl { ub }
+                    {
+                      \addfontfeatures { FakeBold = 1.5 }
                     }
                   \text_uppercase:n {##1}
                 \group_end:
@@ -323,24 +329,8 @@ luatexbase.add_to_callback(
               {##1}
           }
       }
-  }
-
-\NewDocumentCommand \FOCUSAdlLivvicLORD { }
-  {
-    \fontspec_if_feature:nTF { smcp }
       {
-        \textsc { Lord }
-      }
-      {
-        \group_begin:
-          L
-          \AFESBrandFontSelect
-            {
-              , series  = \__focusadl_livvic_next_weight:
-              , relsize = 0.8
-            }
-          ORD
-        \group_end:
+        \__focusadl_textsc:n {#1}
       }
   }
 
@@ -356,7 +346,7 @@ luatexbase.add_to_callback(
     , chapter / language = australian
     , font               = \fontseries { m } \sffamily \footnotesize
     , name / font        =
-    , name / format      = \FOCUSAdlLivvicTextSC {#1}
+    , name / format      = \textsc {#1}
     , parindent          = 1em
     , parskip            = 0pt plus 1pt
     , verse / language   = australian
