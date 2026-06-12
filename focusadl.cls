@@ -887,23 +887,25 @@ luatexbase.add_to_callback(
 
 \cs_new_protected:Nn \__focusadl_leadernotes:nn
   {
-    \group_begin:
-      \bool_if:NT \l__focusadl_use_leader_notes_bool
-        {
-          \tl_if_novalue:nF {#1}
-            {
-              \keys_set:nn { focusadl / leadernotes } {#1}
-            }
-          \color { \l__focusadl_leadernotes_colour_tl }
-          \l__focusadl_leadernotes_font_tl
-          #2
-        }
-    \group_end:
+    \bool_if:NT \l__focusadl_use_leader_notes_bool
+      {
+        \tl_if_novalue:nF {#1}
+          {
+            \keys_set:nn { focusadl / leadernotes } {#1}
+          }
+        \color { \l__focusadl_leadernotes_colour_tl }
+        \l__focusadl_leadernotes_font_tl
+        #2
+      }
   }
 
 \NewDocumentEnvironment { leadernotes } { o+b }
   {
-    \__focusadl_leadernotes:nn {#1} {#2}
+    \group_begin:
+      \par
+      \__focusadl_leadernotes:nn {#1} {#2}
+      \par
+    \group_end:
     \ignorespaces
   }
   { }
@@ -911,7 +913,9 @@ luatexbase.add_to_callback(
 \NewDocumentCommand \textleadernotes { om }
   {
     \mode_leave_vertical:
-    \__focusadl_leadernotes:nn {#1} {#2}
+    \group_begin:
+      \__focusadl_leadernotes:nn {#1} {#2}
+    \group_end:
   }
 
 \prg_new_protected_conditional:Npnn \__focusadl_use_leader_notes:
