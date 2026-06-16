@@ -374,7 +374,7 @@ luatexbase.add_to_callback(
 
 \socket_new_plug:nnn { focusadl / title } { top }
   {
-    \AFESBrandGridSystem
+    \begin{AFESBrandGridSystem}
       [
         , body          = false
         , head / colour = neutral
@@ -383,7 +383,7 @@ luatexbase.add_to_callback(
         , logo / colour = hero
         , url           = false
       ]
-      { }
+    \end{AFESBrandGridSystem}
     \bool_if:nF {#1}
       {
         \tl_if_empty:NF \@title
@@ -402,21 +402,20 @@ luatexbase.add_to_callback(
 
 \socket_new_plug:nnn { focusadl / title } { page }
   {
-    \AFESBrandGridSystem
-      [
-        , body / colour = white
-        , body / height = 4ex + \textheight -
-                          0.1 \c__focusadl_min_paper_side_dim
-        , head / colour = hero
-        , head / height = 0.1 \c__focusadl_min_paper_side_dim
-        , logo          = focus
-        , logo / colour = white
-        , url           = false
-      ]
-      {
-        \AFESBrandFontHeadOne
-        \MakeUppercase { \@title }
-      }
+    \begin{AFESBrandGridSystem}
+        [
+          , body / colour = white
+          , body / height = 4ex + \textheight -
+                            0.1 \c__focusadl_min_paper_side_dim
+          , head / colour = hero
+          , head / height = 0.1 \c__focusadl_min_paper_side_dim
+          , logo          = focus
+          , logo / colour = white
+          , url           = false
+        ]
+      \AFESBrandFontHeadOne
+      \MakeUppercase { \@title }
+    \end{AFESBrandGridSystem}
     \clearpage
   }
 
@@ -446,18 +445,19 @@ luatexbase.add_to_callback(
     \para_end:
     \skip_vertical:n { -8.2ex plus -2.0pt }
     \thispagestyle { empty }
-    \AFESBrandGridSystem
-      [
-        , body / colour = white
-        , body / height = 4ex + \textheight -
-                          0.1 \c__focusadl_min_paper_side_dim
-        , head / colour = hero
-        , head / height = 0.1 \c__focusadl_min_paper_side_dim
-        , logo          = focus
-        , logo / colour = white
-        , url           = false
-      ]
-      {#1}
+    \begin{AFESBrandGridSystem}
+        [
+          , body / colour = white
+          , body / height = 4ex + \textheight -
+                            0.1 \c__focusadl_min_paper_side_dim
+          , head / colour = hero
+          , head / height = 0.1 \c__focusadl_min_paper_side_dim
+          , logo          = focus
+          , logo / colour = white
+          , url           = false
+        ]
+      #1
+    \end{AFESBrandGridSystem}
     \clearpage
   }
   { }
