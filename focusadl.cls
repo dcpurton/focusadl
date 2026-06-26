@@ -253,7 +253,11 @@ luatexbase.add_to_callback(
 
 \ExplSyntaxOn
 
-\hook_gput_code:nnn { normalfont } { focusadl } { \AFESBrandFontBody }
+\hook_gput_code:nnn { begindocument / end } { focusadl }
+  {
+    \hook_gput_code:nnn { normalfont } { focusadl } { \AFESBrandFontBody }
+    \normalfont
+  }
 
 \NewDocumentCommand \FOCUSAdlLoadLanguage { m }
   {
