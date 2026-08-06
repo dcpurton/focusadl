@@ -19,6 +19,14 @@
 \RequirePackage{tabularray}
 \UseTblrLibrary{booktabs}
 
+\SetTblrTemplate{caption}{empty}
+\SetTblrTemplate{conthead}{empty}
+\SetTblrTemplate{contfoot}{empty}
+\SetTblrTemplate{caption-tag}{empty}
+\SetTblrTemplate{caption-sep}{empty}
+\DefTblrTemplate{contfoot-text}{default}{}
+\DefTblrTemplate{conthead-text}{default}{}
+
 \NewDocumentEnvironment{FOCUSAdlTable}{m+b}{
   \SetTblrInner{
     row{1} = {font=\fontseries{sb}\selectfont},
@@ -28,4 +36,15 @@
   \end{tblr}%
   \ignorespaces
 }{}
+
+\NewDocumentEnvironment{FOCUSAdlLongTable}{m+b}{
+  \SetTblrInner{
+    row{1} = {font=\fontseries{sb}\selectfont},
+  }
+  \begin{longtblr}{#1}
+    #2
+  \end{longtblr}%
+  \ignorespaces
+}{}
+
 \endinput
