@@ -914,11 +914,13 @@ luatexbase.add_to_callback(
   }
   { }
 
-\NewDocumentCommand \textleadernotes { om }
+\NewDocumentCommand \textleadernotes { som }
   {
     \mode_leave_vertical:
     \group_begin:
-      \__focusadl_leadernotes:nn {#1} {#2}
+      \__focusadl_leadernotes:nn {#2} {#3}
+      \bool_if:nT {#1}
+        { \para_end: }
     \group_end:
   }
 
