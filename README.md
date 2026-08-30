@@ -60,6 +60,10 @@ The class auto-spaces `enumerate` items. The spacing can be set using the
 
 - `spaces=normal | tighter | looser`
 
+Also available is `\FOCUSAdlSpace[<value>=1]` which inserts the standard space
+multiplied by `<value>` and `\FOCUSAdlSpaceSkip{<value>}` which inserts the
+standard space multiplied by `<value>` as a skip.
+
 ### Multi-lingual support
 
 Use `\FOCUSAdlLoadLanguage{<language>}` to load a language file. The following
@@ -103,7 +107,8 @@ colour. Three types of `accentbox` are supported:
 - `type=onecolumn` (default): Set a standard single column breakable box.
 - `type=twocolumn`: Set a two column breakable box.
 - `type=parallel`: Set a two column breakable box with parallel content (e.g.,
-  for setting the Bible in two languages in parallel).
+  for setting the Bible in two languages in parallel). The ratio of column
+  widths can be set using the `ratio` option (default: `0.5`).
 
 A horizontal line can be inserted with `\newsegment` and you can switch to the
 second column in a parallel box with `\secondcolumn`.
@@ -111,9 +116,9 @@ second column in a parallel box with `\secondcolumn`.
 ### Tables
 
 For tables, use `\FOCUSAdlLoadModule{tables}`. This loads the `tabularray`
-package with the `booktabs` library and sets up a simple `FOCUSAdlTable`
-environment( taking `tabularray` options in its first argument) that sets the
-font in the first row to `\fontseries{sb}`.
+package with the `booktabs` library and sets up simple `FOCUSAdlTable` and
+`FOCUSAdlLongTable` environments taking `tabularray` options in their first
+argument). The font in the first row is set to `\fontseries{sb}`.
 
 ### Miscellaneous commands
 
@@ -124,7 +129,12 @@ expression.
 ### Leader notes
 
 Leader notes can be inserted using the `leadernotes` environment and
-`\textleadernotes` function.
+`\textleadernotes` function. `\textleadernotes*` ends the paragraph at the end
+of the function. The optional first argument of the command and environment
+allows a `colour` (default: `black!40`) and `font` (default:
+`\fontseries{m}\sffamily\footnotesize`) to be set.
+
+There is also a `\IFUseLeaderNotesTF` conditional available.
 
 ## Licence
 
