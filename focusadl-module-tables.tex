@@ -27,10 +27,11 @@
 \DefTblrTemplate{contfoot-text}{default}{}
 \DefTblrTemplate{conthead-text}{default}{}
 
+\SetTblrInner{
+  row{1} = {font=\fontseries{sb}\selectfont},
+}
+
 \NewDocumentEnvironment{FOCUSAdlTable}{m+b}{
-  \SetTblrInner{
-    row{1} = {font=\fontseries{sb}\selectfont},
-  }
   \begin{tblr}{#1}
     #2
   \end{tblr}%
@@ -38,9 +39,6 @@
 }{}
 
 \NewDocumentEnvironment{FOCUSAdlLongTable}{m+b}{
-  \SetTblrInner{
-    row{1} = {font=\fontseries{sb}\selectfont},
-  }
   \begin{longtblr}{#1}
     #2
   \end{longtblr}%
