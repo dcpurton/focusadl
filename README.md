@@ -66,10 +66,11 @@ standard space multiplied by `<value>` as a skip.
 
 ### Multi-lingual support
 
-Use `\FOCUSAdlLoadLanguage{<language>}` to load a language file. The following
-languages are supported:
+Use `\FOCUSAdlLoadLanguage[options]{<language>}` to load a language file. The
+following languages are supported:
 
 - chinese
+    - options: `default = simplified | traditional | none`
 
 ### Emoji support
 
