@@ -18,13 +18,49 @@
 
 \RequirePackage{setspace}
 
+\ExplSyntaxOn
+
+\tl_new:N \focusadllangsimplifiedonchar
+\tl_new:N \focusadllangtraditionalonchar
+
+\keys_define:nn { focusadl / lang / chinese }
+  {
+    , default .choices:nn       = { simplified , traditional , none }
+                                  {
+                                    \tl_clear:N
+                                      \focusadllangsimplifiedonchar
+                                    \tl_clear:N
+                                      \focusadllangtraditionalonchar
+                                    \str_if_eq:nnF {#1} { none }
+                                      {
+                                        \tl_set:cn
+                                          { focusadllang#1onchar }
+                                          { ids ~ fonts }
+                                      }
+                                  }
+    , default .value_required:n = true
+    , default .initial:n        = simplified
+  }
+
+\keys_set:nV { focusadl / lang / chinese } \l__focusadl_lang_options_clist
+
+\ExplSyntaxOff
+
 \babelprovide
   [
     , import
-    , language = Chinese Simplified
-    , onchar = ids fonts
+    , language = Chinese ~ Simplified
+    , onchar = \focusadllangsimplifiedonchar
   ]
   {chinese-simplified}
+
+\babelprovide
+  [
+    , import
+    , language = Chinese ~ Traditional
+    , onchar = \focusadllangtraditionalonchar
+  ]
+  {chinese-traditional}
 
 \babelfont [chinese-simplified] {sf}
   [
@@ -98,6 +134,78 @@
   ]
   {Noto Sans CJK SC}
 
+\babelfont [chinese-traditional] {sf}
+  [
+    , UprightFont        = Noto Sans CJK HK DemiLight
+    , ItalicFont         = Noto Sans CJK HK DemiLight
+    , BoldFont           = Noto Sans CJK HK Medium
+    , BoldItalicFont     = Noto Sans CJK HK Medium
+    , UprightFeatures    = {
+                             , SmallCapsFont = {Noto Sans CJK HK DemiLight}
+                           }
+    , ItalicFeatures     = {
+                             , FakeSlant     = 0.15
+                             , SmallCapsFont = {Noto Sans CJK HK DemiLight}
+                           }
+    , BoldFeatures       = {
+                             , SmallCapsFont = {Noto Sans CJK HK Medium}
+                           }
+    , BoldItalicFeatures = {
+                             , FakeSlant     = 0.15
+                             , SmallCapsFont = {Noto Sans CJK HK Medium}
+                           }
+  ]
+  {Noto Sans CJK HK}
+
+\babelfont [chinese-traditional] {livvic}
+  [
+    , FontFace = {ul} {n}  { Font = Noto Sans CJK HK Thin }
+    , FontFace = {ul} {it} {
+                             , Font      = Noto Sans CJK HK Thin
+                             , FakeSlant = 0.15
+                           }
+    , FontFace = {el} {n}  {
+                             , Font      = Noto Sans CJK HK Thin
+                             , FakeBold  = 0.5
+                           }
+    , FontFace = {el} {it} {
+                             , Font      = Noto Sans CJK HK Thin
+                             , FakeBold  = 0.5
+                             , FakeSlant = 0.15
+                           }
+    , FontFace = {l}  {n}  { Font = Noto Sans CJK HK Light }
+    , FontFace = {l}  {it} {
+                             , Font      = Noto Sans CJK HK Light
+                             , FakeSlant = 0.15
+                           }
+    , FontFace = {sl} {n}  { Font = Noto Sans CJK HK Regular }
+    , FontFace = {sl} {it} {
+                             , Font      = Noto Sans CJK HK Regular
+                             , FakeSlant = 0.15
+                           }
+    , UprightFont        = Noto Sans CJK HK Medium
+    , ItalicFont         = Noto Sans CJK HK Medium
+    , ItalicFontFeatures = { FakeSlant = 0.15 }
+    , FontFace = {sb} {n}  {
+                             , Font      = Noto Sans CJK HK Medium
+                             , FakeBold  = 0.5
+                           }
+    , FontFace = {sb} {it} {
+                             , Font      = Noto Sans CJK HK Medium
+                             , FakeBold  = 0.5
+                             , FakeSlant = 0.15
+                           }
+    , BoldFont           = Noto Sans CJK HK Bold
+    , BoldItalicFont     = Noto Sans CJK HK Bold
+    , BoldItalicFeatures = { FakeSlant = 0.15 }
+    , FontFace = {ub} {n} { Font = Noto Sans CJK HK Black }
+    , FontFace = {ub} {it} {
+                             , Font      = Noto Sans CJK HK Black
+                             , FakeSlant = 0.15
+                           }
+  ]
+  {Noto Sans CJK HK}
+
 
 \babelprehyphenation {chinese-simplified} { [‘“][‘“] }
   {
@@ -165,6 +273,8 @@
 \babelcharproperty{`‘}{linebreak}{op}
 \expandafter\addto\csname extraschinese-simplified\endcsname{\onehalfspacing}
 
+\expandafter\addto\csname extraschinese-traditional\endcsname{\onehalfspacing}
+
 \RequirePackage{luacode}
 
 \begin{luacode}
@@ -217,6 +327,17 @@ end
     , poetry/bigindent   = 2em
     , before             = \FOCUSAdlCJKQuoteKerningOn
     , after              = \FOCUSAdlCJKQuoteKerningOff
+  }
+
+\scripturestyle { ncv }
+  {
+    , language           = chinese-traditional
+    , version            = NCV
+    , chapter/showverse  = true
+    , selah/format       = (##1)
+    , selah/text         = 細拉
+    , poetry/indent      = 0em
+    , poetry/bigindent   = 2em
   }
 
 \endinput

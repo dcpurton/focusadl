@@ -259,9 +259,16 @@ luatexbase.add_to_callback(
     \normalfont
   }
 
-\NewDocumentCommand \FOCUSAdlLoadLanguage { m }
+\clist_new:N \l__focusadl_lang_options_clist
+
+\NewDocumentCommand \FOCUSAdlLoadLanguage { om }
   {
-    \file_input:n { focusadl-lang-#1 }
+    \tl_if_novalue:nTF {#1}
+      { \clist_clear:N \l__focusadl_lang_options_clist }
+      {
+        \clist_set:Nn \l__focusadl_lang_options_clist {#1}
+      }
+    \file_input:n { focusadl-lang-#2 }
   }
 
 \NewDocumentCommand \FOCUSAdlLoadModule { m }
