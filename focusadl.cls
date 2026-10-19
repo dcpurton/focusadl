@@ -34,7 +34,7 @@
       {
         latexmk ~
           -lualatex ~
-          -jobname="\c_sys_jobname_str-leadernotes" ~
+          -jobname=" \c_sys_jobname_str -leadernotes" ~
           -usepretex='\ExplSyntaxOn \bool_new:N \token_to_str:N \l__focusadl_use_leader_notes_bool \bool_set_true:N \token_to_str:N \l__focusadl_use_leader_notes_bool \ExplSyntaxOff' ~
           \c_sys_jobname_str
       }
@@ -206,7 +206,7 @@
     , language    = Default
     , hyphenrules = ukenglish
   ]
-  {australian}
+  { australian }
 
 \ExplSyntaxOff
 
@@ -300,7 +300,7 @@ luatexbase.add_to_callback(
       \f@series
   }
 
-\prg_new_conditional:Nnn \__focusadl_if_lowercase:n { TF, T, F }
+\prg_new_protected_conditional:Nnn \__focusadl_if_lowercase:n { TF }
   {
     \tl_set:Ne \l_tmpa_tl {#1}
     \tl_set:Ne \l_tmpb_tl
@@ -385,7 +385,7 @@ luatexbase.add_to_callback(
 
 \socket_new_plug:nnn { focusadl / title } { top }
   {
-    \begin{AFESBrandGridSystem}
+    \begin { AFESBrandGridSystem }
       [
         , body          = false
         , head / colour = neutral
@@ -394,7 +394,7 @@ luatexbase.add_to_callback(
         , logo / colour = hero
         , url           = false
       ]
-    \end{AFESBrandGridSystem}
+    \end { AFESBrandGridSystem }
     \bool_if:nF {#1}
       {
         \tl_if_empty:NF \@title
@@ -413,7 +413,7 @@ luatexbase.add_to_callback(
 
 \socket_new_plug:nnn { focusadl / title } { page }
   {
-    \begin{AFESBrandGridSystem}
+    \begin { AFESBrandGridSystem }
         [
           , body / colour = white
           , body / height = 4ex + \textheight -
@@ -426,7 +426,7 @@ luatexbase.add_to_callback(
         ]
       \AFESBrandFontHeadOne
       \MakeUppercase { \@title }
-    \end{AFESBrandGridSystem}
+    \end { AFESBrandGridSystem }
     \clearpage
   }
 
@@ -456,7 +456,7 @@ luatexbase.add_to_callback(
     \para_end:
     \skip_vertical:n { -8.2ex plus -2.0pt }
     \thispagestyle { empty }
-    \begin{AFESBrandGridSystem}
+    \begin { AFESBrandGridSystem }
         [
           , body / colour = white
           , body / height = 4ex + \textheight -
@@ -468,7 +468,7 @@ luatexbase.add_to_callback(
           , url           = false
         ]
       #1
-    \end{AFESBrandGridSystem}
+    \end { AFESBrandGridSystem }
     \clearpage
   }
   { }
@@ -492,10 +492,10 @@ luatexbase.add_to_callback(
 \fancyhf { }
 \legacy_if:nTF { @twoside }
   {
-    \fancyhead [ \exp_after:wN R \l__focusadl_obv_tl ] { \thepage }
-    \fancyhead [ \exp_after:wN L \l__focusadl_rev_tl ] { \thepage }
-    \fancyhead [ \exp_after:wN R \l__focusadl_rev_tl ] { \FOCUSAdlUseTitle }
-    \fancyhead [ \exp_after:wN L \l__focusadl_obv_tl ]
+    \fancyhead [ \exp_after:w R \l__focusadl_obv_tl ] { \thepage }
+    \fancyhead [ \exp_after:w L \l__focusadl_rev_tl ] { \thepage }
+    \fancyhead [ \exp_after:w R \l__focusadl_rev_tl ] { \FOCUSAdlUseTitle }
+    \fancyhead [ \exp_after:w L \l__focusadl_obv_tl ]
       {
         \tl_if_empty:NTF \l__focusadl_passage_tl
           { \FOCUSAdlUseTitle }
@@ -577,7 +577,7 @@ luatexbase.add_to_callback(
                    {
                      \raggedright
                      \normalfont
-                     \AFESBrandFontSelect{series=sb}
+                     \AFESBrandFontSelect { series = sb }
                    }
   }
 
@@ -716,11 +716,11 @@ luatexbase.add_to_callback(
 % either side of the columns
 
 % See https://tex.stackexchange.com/a/132461/87678
-\cs_new:Npn \__focusadl_multicol_rules: #1\full@width#2#3!!
+\cs_new:Npn \__focusadl_multicol_rules: #1 \full@width #2 #3 !!
   {
     \cs_set:Npn \page@sofar
       {
-        #1\full@width
+        #1 \full@width
           {
             {
               \color { colframe }
@@ -763,7 +763,7 @@ luatexbase.add_to_callback(
     \dim_set:Nn \columnsep { 16mm }
     \dim_zero:N \multicolsep
     \cs_set_eq:NN \newsegment \__focusadl_multicol_new_segment:
-    \exp_after:wN \__focusadl_multicol_rules: \page@sofar !!
+    \exp_after:w \__focusadl_multicol_rules: \page@sofar !!
     \tikz
       {
         \fill [ colframe ]
@@ -1021,13 +1021,13 @@ luatexbase.add_to_callback(
 \NewDocumentCommand \imprintpage { }
   {
     \clearpage
-    \thispagestyle{empty}
+    \thispagestyle { empty }
     \group_begin:
       \vspace* { 3cm }
       \small
       \FOCUSAdlUseTitle
       \par
-      © ~ \the\year{} ~ FOCUS ~ Adelaide
+      © ~ \the\year { } ~ FOCUS ~ Adelaide
       \par
       \bigskip
       \socket_use:n { focusadl / biblecopyright }
@@ -1038,6 +1038,8 @@ luatexbase.add_to_callback(
 %%%
 %%% URLs
 %%%
+
+\ExplSyntaxOff
 
 \RequirePackage{url}
 
@@ -1051,5 +1053,7 @@ luatexbase.add_to_callback(
   \do\-{\penalty\UrlBreakPenalty\mathchar`-}%
   \do\ {\Url@space}\do\%{\Url@percent}\do\^^M{\Url@space}%
   \Url@force@Tilde}
+
+\ExplSyntaxOn
 
 \endinput
